@@ -33,6 +33,17 @@
         <li>
           <h3><%= note.title %> (Category: <%= note.category %>, Week: <%= note.week %>)</h3>
           <p><%= note.content %></p>
+
+
+          <!-- add location message when create new note-->
+          <p>
+            <strong>Location:</strong> <%= note.location_name || 'none' %> <br />
+            <strong>Latitude:</strong> 
+            <%= note.latitude ? note.latitude.toFixed(2) : 'none' %> <br /> 
+            <strong>Longitude:</strong> 
+            <%= note.longitude ? note.longitude.toFixed(2) : 'none' %> 
+          </p>
+
           <form action="/notes/delete/<%= note.id %>" method="post" style="display:inline;">
             <button type="submit">Delete</button>
           </form>

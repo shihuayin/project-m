@@ -48,13 +48,23 @@ router.get("/add", redirectLogin, (req, res) => {
 // add submit
 router.post("/add", redirectLogin, (req, res) => {
   const userId = req.session.userId;
-  const { title, content, category, week } = req.body;
+  const { title, content, category, week, latitude, longitude, location_name } =
+    req.body;
 
   const query =
-    "INSERT INTO notes (user_id, title, content, category, week) VALUES (?, ?, ?, ?, ?)";
+    "INSERT INTO notes (user_id, title, content, category, week,latitude, longitude, location_name) VALUES (?, ?, ?, ?, ?,?,?,?)";
   global.db.query(
     query,
-    [userId, title, content, category, week],
+    [
+      userId,
+      title,
+      content,
+      category,
+      week,
+      latitude,
+      longitude,
+      location_name,
+    ],
     (err, result) => {
       if (err) {
         console.error("Failed to add note:", err);

@@ -3,6 +3,12 @@
   <head>
     <title>Add a New Note</title>
     <link rel="stylesheet" type="text/css" href="/main.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   </head>
   <body>
     <h1>Add a New Note</h1>
@@ -28,8 +34,62 @@
       </select>
       <br />
 
-      <button type="submit">Add Note</button>
+      <!-- map location message part -->
+
+      <label for="location_name">Location Name:</label>
+      <input type="text" name="location_name" id="location_name" readonly />
+      <br />
+      <input type="hidden" name="latitude" id="latitude" />
+      <input type="hidden" name="longitude" id="longitude" />
+
+      <!--map picture -->
+      <div id="map" style="height: 300px"></div>
+      <br />
+
+      <button type="submit">Create Note</button>
     </form>
+
+    <script>
+      // map
+      var map = L.map("map").setView([51.505, -0.09], 13);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      var marker;
+
+      // click listener
+      map.on("click", function (e) {
+        var lat = e.latlng.lat;
+        var lng = e.latlng.lng;
+
+        if (marker) {
+          marker.setLatLng(e.latlng);
+        } else {
+          marker = L.marker(e.latlng).addTo(map);
+        }
+
+        // add lat and lng
+        document.getElementById("latitude").value = lat;
+        document.getElementById("longitude").value = lng;
+
+        // use API get location
+        fetch(
+          `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=3751cf95103f4302aebe7afe503ea3f3&language=en`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            if (data && data.results && data.results.length > 0) {
+              const locationName = data.results[0].formatted;
+              document.getElementById("location_name").value = locationName;
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching location name:", error);
+          });
+      });
+    </script>
 
     <a href="/notes">Back to Notes</a>
   </body>
