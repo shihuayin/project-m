@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Note</title>
+  <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+  <h1>Edit Note</h1>
+
+  <form action="/notes/edit/<%= note.id %>" method="post">
+    <label for="title">Title:</label>
+    <input type="text" name="title" value="<%= note.title %>" required />
+    <br />
+
+    <label for="content">Content:</label>
+    <textarea name="content" required><%= note.content %></textarea>
+    <br />
+
+    <label for="category">Category:</label>
+    <input type="text" name="category" value="<%= note.category %>" required />
+    <br />
+
+    <label for="week">Week:</label>
+    <select name="week" required>
+      <% for (let i = 1; i <= 10; i++) { %>
+        <option value="Week <%= i %>" <%= note.week === 'Week ' + i ? 'selected' : '' %>>Week <%= i %></option>
+      <% } %>
+    </select>
+    <br />
+
+    <button type="submit">Update Note</button>
+  </form>
+
+  <a href="/notes">Back to Notes</a>
+</body>
+</html>

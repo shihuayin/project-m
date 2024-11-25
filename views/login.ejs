@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login to Learning Notes System</title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+  </head>
+  <body>
+    <h1>Login to Learning Notes System</h1>
+    <form method="POST" action="/users/login">
+      <p>Email: <input id="email" type="email" name="email" required /></p>
+      <p>
+        Password:
+        <input id="password" type="password" name="password" required />
+      </p>
+      <input type="submit" value="Login" />
+    </form>
+    <p>Don't have an account? <a href="/users/register">Register here</a></p>
+  </body>
+</html>

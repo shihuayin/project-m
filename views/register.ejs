@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Register</title>
+    <style>
+      .hint {
+        color: grey;
+      }
+      .error {
+        color: red;
+      }
+      .success {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Register</h1>
+    <form action="/users/register" method="post">
+      <% if (errors.length > 0) { %>
+      <ul>
+        <% errors.forEach(function (error) { %>
+        <li class="error"><%= error.msg %></li>
+        <% }); %>
+      </ul>
+      <% } %>
+
+      <label for="username">Username:</label>
+      <input type="text" name="username" required />
+      <div class="hint">
+        Username must be 3-15 characters long and can include letters, numbers,
+        underscores (_), and dots (.).
+      </div>
+      <br />
+
+      <label for="first_name">First Name:</label>
+      <input type="text" name="first_name" required />
+      <div class="hint">First name must contain only letters.</div>
+      <br />
+
+      <label for="last_name">Last Name:</label>
+      <input type="text" name="last_name" required />
+      <div class="hint">Last name must contain only letters.</div>
+      <br />
+
+      <label for="email">Email:</label>
+      <input type="email" name="email" required />
+      <div class="hint">Please enter a valid email address.</div>
+      <br />
+
+      <label for="password">Password:</label>
+      <input type="password" name="password" required id="password-input" />
+      <div id="password-hint">
+        <ul>
+          <li class="error" id="length-check">Must be at least 8 characters</li>
+          <li class="error" id="uppercase-check">
+            Must contain at least one uppercase letter
+          </li>
+          <li class="error" id="lowercase-check">
+            Must contain at least one lowercase letter
+          </li>
+        </ul>
+      </div>
+      <br />
+
+      <button type="submit">Register</button>
+    </form>
+
+    <!-- passwprd  rules-->
+    <script>
+      document
+        .getElementById("password-input")
+        .addEventListener("input", function () {
+          const password = this.value;
+
+          const lengthCheck = document.getElementById("length-check");
+          const uppercaseCheck = document.getElementById("uppercase-check");
+          const lowercaseCheck = document.getElementById("lowercase-check");
+
+          if (password.length >= 8) {
+            lengthCheck.classList.remove("error");
+            lengthCheck.classList.add("success");
+          } else {
+            lengthCheck.classList.remove("success");
+            lengthCheck.classList.add("error");
+          }
+
+          if (/[A-Z]/.test(password)) {
+            uppercaseCheck.classList.remove("error");
+            uppercaseCheck.classList.add("success");
+          } else {
+            uppercaseCheck.classList.remove("success");
+            uppercaseCheck.classList.add("error");
+          }
+
+          if (/[a-z]/.test(password)) {
+            lowercaseCheck.classList.remove("error");
+            lowercaseCheck.classList.add("success");
+          } else {
+            lowercaseCheck.classList.remove("success");
+            lowercaseCheck.classList.add("error");
+          }
+        });
+    </script>
+  </body>
+</html>
