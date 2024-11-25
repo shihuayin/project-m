@@ -9,4 +9,9 @@ router.get("/", (req, res) => {
   }
 });
 
+//about page
+router.get("/about", (req, res) => {
+  res.render("about", { title: "About Learning Notes System" });
+});
+
 module.exports = router;
