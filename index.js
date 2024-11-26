@@ -51,6 +51,10 @@ app.use("/users", usersRoutes);
 const notesRoutes = require("./routes/notes");
 app.use("/notes", notesRoutes);
 
+//api route
+const apiRoutes = require("./routes/api");
+app.use("/api", apiRoutes);
+
 // start
 app.listen(port, () => {
   console.log(`Node app listening on port ${port}!`);
