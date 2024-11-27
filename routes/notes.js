@@ -7,11 +7,38 @@ router.get("/", redirectLogin, (req, res) => {
   const userId = req.session.userId;
   const username = req.session.username;
 
-  // searchby catagory or week
+  const query = "SELECT * FROM notes WHERE user_id = ?";
+  const queryParams = [userId];
+
+  global.db.query(query, queryParams, (err, results) => {
+    if (err) {
+      console.error("Failed to retrieve notes:", err);
+      return res.status(500).send("Failed to retrieve notes");
+    }
+
+    res.render("notes", {
+      username: username,
+      notes: results,
+    });
+  });
+});
+
+// search
+router.get("/search", redirectLogin, (req, res) => {
   const { category, week } = req.query;
 
-  let query = "SELECT * FROM notes WHERE user_id = ?";
-  let queryParams = [userId];
+  if (!category && !week) {
+    return res.render("search_notes", {
+      notes: undefined,
+      search: {
+        category: "",
+        week: "",
+      },
+    });
+  }
+
+  const query = "SELECT * FROM notes WHERE user_id = ?";
+  const queryParams = [req.session.userId];
 
   if (category) {
     query += " AND category = ?";
@@ -29,8 +56,7 @@ router.get("/", redirectLogin, (req, res) => {
       return res.status(500).send("Failed to retrieve notes");
     }
 
-    res.render("notes", {
-      username: username,
+    res.render("search_notes", {
       notes: results,
       search: {
         category: category || "",

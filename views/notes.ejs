@@ -1,62 +1,51 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Your Notes</title>
-  <link rel="stylesheet" type="text/css" href="/main.css" />
-</head>
-<body>
-  <h1>Welcome, <%= username %>!</h1>
+  <head>
+    <title>Your Notes</title>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+  </head>
+  <body>
+    <h1>Welcome, <%= username %>!</h1>
 
-  <h2>Your Notes</h2>
-  <a href="/notes/add">Add a New Note</a>
-  
-  <!-- search by category or week -->
-  <h3>Search Notes</h3>
-  <form action="/notes" method="get">
-    <label for="category">Category:</label>
-    <input type="text" name="category" value="<%= search.category %>" />
-    
-    <label for="week">Week:</label>
-    <select name="week">
-      <option value="">Select Week</option>
-      <% for (let i = 1; i <= 10; i++) { %>
-        <option value="Week <%= i %>" <%= search.week === 'Week ' + i ? 'selected' : '' %>>Week <%= i %></option>
-      <% } %>
-    </select>
+    <h2>Your Notes</h2>
+    <a href="/notes/add">Add a New Note</a>
+    <br />
+    <a href="/notes/search">Search Notes</a>
 
-    <button type="submit">Search</button>
-  </form>
-
-  <% if (notes.length > 0) { %>
+    <% if (notes.length > 0) { %>
     <ul>
       <% notes.forEach(function(note) { %>
-        <li>
-          <h3><%= note.title %> (Category: <%= note.category %>, Week: <%= note.week %>)</h3>
-          <p><%= note.content %></p>
+      <li>
+        <h3>
+          <%= note.title %> (Category: <%= note.category %>, Week: <%= note.week
+          %>)
+        </h3>
+        <p><%= note.content %></p>
 
+        <!-- add location message when create new note-->
+        <p>
+          <strong>Location:</strong> <%= note.location_name || 'none' %> <br />
+          <strong>Latitude:</strong>
+          <%= note.latitude ? note.latitude.toFixed(2) : 'none' %> <br />
+          <strong>Longitude:</strong>
+          <%= note.longitude ? note.longitude.toFixed(2) : 'none' %>
+        </p>
 
-          <!-- add location message when create new note-->
-          <p>
-            <strong>Location:</strong> <%= note.location_name || 'none' %> <br />
-            <strong>Latitude:</strong> 
-            <%= note.latitude ? note.latitude.toFixed(2) : 'none' %> <br /> 
-            <strong>Longitude:</strong> 
-            <%= note.longitude ? note.longitude.toFixed(2) : 'none' %> 
-          </p>
-
-          <form action="/notes/delete/<%= note.id %>" method="post" style="display:inline;">
-            <button type="submit">Delete</button>
-          </form>
-          <a href="/notes/edit/<%= note.id %>">Edit</a>
-        </li>
+        <form
+          action="/notes/delete/<%= note.id %>"
+          method="post"
+          style="display: inline"
+        >
+          <button type="submit">Delete</button>
+        </form>
+        <a href="/notes/edit/<%= note.id %>">Edit</a>
+      </li>
       <% }); %>
     </ul>
-  <% } else { %>
+    <% } else { %>
     <p>No notes found.</p>
-  <% } %>
+    <% } %>
 
- 
-
-  <a href="/users/logout">Logout</a>
-</body>
+    <a href="/users/logout">Logout</a>
+  </body>
 </html>
