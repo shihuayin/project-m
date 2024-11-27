@@ -55,6 +55,10 @@ app.use("/notes", notesRoutes);
 const apiRoutes = require("./routes/api");
 app.use("/api", apiRoutes);
 
+// weather route
+const weatherRoutes = require("./routes/weather");
+app.use("/weather", weatherRoutes);
+
 // start
 app.listen(port, () => {
   console.log(`Node app listening on port ${port}!`);

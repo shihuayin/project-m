@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Check the Weather</title>
+  </head>
+  <body>
+    <h1>Check the Weather</h1>
+    <form action="/weather" method="post">
+      <label for="city">Enter City Name:</label>
+      <input type="text" name="city" placeholder="e.g., London" />
+      <button type="submit">Get Weather</button>
+    </form>
+
+    <!-- weather result -->
+    <% if (typeof temperature !== 'undefined') { %>
+    <h2>Weather in <%= city %></h2>
+    <p>Temperature: <%= temperature %> °C</p>
+    <p>Humidity: <%= humidity %>%</p>
+    <p>Wind speed: <%= windSpeed %> m/s</p>
+    <p>Pressure: <%= pressure %> hPa</p>
+    <% } else if (typeof error !== 'undefined') { %>
+    <p><%= error %></p>
+    <% } %>
+
+    <a href="/">Back to Home page</a>
+  </body>
+</html>
