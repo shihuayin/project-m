@@ -46,6 +46,108 @@
     <p>No notes found.</p>
     <% } %>
 
+<!-- timer   part -->
+
+    <div id="pomodoro-timer">
+      <h2>Pomodoro Timer</h2>
+      <label for="time-select">Select Focus Time:</label>
+      <select id="time-select">
+        <option value="20">20 minutes</option>
+        <option value="40">40 minutes</option>
+        <option value="60">60 minutes</option>
+      </select>
+      <div id="timer-display">20:00</div>
+      <button id="start-button">Start</button>
+      <button id="pause-button" disabled>Pause</button>
+      <button id="reset-button" disabled>Reset</button>
+    </div>
+
+    <!-- timer functuon -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const startButton = document.getElementById("start-button");
+        const pauseButton = document.getElementById("pause-button");
+        const resetButton = document.getElementById("reset-button");
+        const timerDisplay = document.getElementById("timer-display");
+        const timeSelect = document.getElementById("time-select");
+
+        let timer;  
+        let timeLeft = 20 * 60;  
+        let isRunning = false; 
+
+
+        function updateDisplay() {
+          const minutes = Math.floor(timeLeft / 60);
+          const seconds = timeLeft % 60;
+          timerDisplay.textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+        }
+
+ 
+        function startTimer() {
+          if (!isRunning) {
+            isRunning = true;
+            timer = setInterval(function () {
+              if (timeLeft > 0) {
+                timeLeft--;
+                updateDisplay();
+              } else {
+                clearInterval(timer);
+                isRunning = false;
+                alert("Time's up! Great job staying focused!");
+                startButton.disabled = false;
+                pauseButton.disabled = true;
+                resetButton.disabled = false;
+              }
+            }, 1000);
+
+            startButton.disabled = true;  
+            pauseButton.disabled = false;  
+            resetButton.disabled = false;  
+          }
+        }
+
+        function pauseTimer() {
+          if (isRunning) {
+            clearInterval(timer);
+            isRunning = false;
+            startButton.disabled = false; 
+            pauseButton.disabled = true;  
+          }
+        }
+
+
+        function resetTimer() {
+          clearInterval(timer);
+
+          const selectedMinutes = parseInt(timeSelect.value);
+          timeLeft = selectedMinutes * 60;  
+          isRunning = false;
+          updateDisplay();
+
+          startButton.disabled = false;  
+          pauseButton.disabled = true;   
+          resetButton.disabled = true;  
+        }
+
+
+        timeSelect.addEventListener("change", function () {
+          if (!isRunning) {
+            const selectedMinutes = parseInt(timeSelect.value);
+            timeLeft = selectedMinutes * 60;  
+            updateDisplay();  
+          }
+        });
+
+
+        startButton.addEventListener("click", startTimer);
+        pauseButton.addEventListener("click", pauseTimer);
+        resetButton.addEventListener("click", resetTimer);
+
+  
+        updateDisplay();
+      });
+    </script>
+
     <a href="/">Back to Home page</a>
     </br>
     <a href="/users/logout">Logout</a>
