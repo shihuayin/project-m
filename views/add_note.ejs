@@ -9,6 +9,25 @@
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <style>
+      @keyframes blink {
+        0% {
+          background-color: red;
+        }
+        50% {
+          background-color: darkred;
+        }
+        100% {
+          background-color: red;
+        }
+      }
+
+      .blinking {
+        animation: blink 1s infinite;
+        color: white;
+      }
+    </style>
   </head>
   <body>
     <h1>Add a New Note</h1>
@@ -19,7 +38,15 @@
       <br />
 
       <label for="content">Content:</label>
-      <textarea name="content" required></textarea>
+      <textarea name="content" id="note-content" required></textarea>
+      <button
+        type="button"
+        id="toggle-voice-input"
+        style="background-color: white"
+      >
+        🎤 Start Voice Input
+      </button>
+
       <br />
 
       <label for="category">Category:</label>
@@ -50,7 +77,61 @@
     </form>
 
     <script>
-      // map
+      //voice part
+      const toggleVoiceInputButton =
+        document.getElementById("toggle-voice-input");
+      const noteContent = document.getElementById("note-content");
+
+      if ("webkitSpeechRecognition" in window) {
+        const recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = false;
+        recognition.lang = "en-US";
+
+        let isRecording = false;
+
+        toggleVoiceInputButton.addEventListener("click", () => {
+          if (!isRecording) {
+            // voice input
+            recognition.start();
+            isRecording = true;
+            toggleVoiceInputButton.textContent = "🛑 Stop Input";
+            toggleVoiceInputButton.classList.add("blinking");
+          } else {
+            // voice stop
+            recognition.stop();
+            isRecording = false;
+            toggleVoiceInputButton.textContent = "🎤 Start Voice Input";
+            toggleVoiceInputButton.classList.remove("blinking");
+          }
+        });
+        // deal with return result
+        recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          noteContent.value += " " + transcript;
+        };
+
+        //deal with error
+        recognition.onerror = (event) => {
+          console.error("Speech recognition error:", event.error);
+          isRecording = false;
+          toggleVoiceInputButton.textContent = "🎤 Start Voice Input";
+          toggleVoiceInputButton.classList.remove("blinking");
+        };
+
+        //deal with ends
+        recognition.onend = () => {
+          isRecording = false;
+          toggleVoiceInputButton.textContent = "🎤 Start Voice Input";
+          toggleVoiceInputButton.classList.remove("blinking");
+        };
+      } else {
+        // if browser do not support speech convert API
+        toggleVoiceInputButton.disabled = true;
+        alert("Speech Recognition API is not supported in this browser.");
+      }
+
+      // map part
       var map = L.map("map").setView([51.505, -0.09], 13);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
