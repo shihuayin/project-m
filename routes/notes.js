@@ -37,7 +37,7 @@ router.get("/search", redirectLogin, (req, res) => {
     });
   }
 
-  const query = "SELECT * FROM notes WHERE user_id = ?";
+  let query = "SELECT * FROM notes WHERE user_id = ?";
   const queryParams = [req.session.userId];
 
   if (category) {

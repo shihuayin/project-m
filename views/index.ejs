@@ -5,20 +5,29 @@
   </head>
   <body>
     <h1>Welcome to <%= title %></h1>
+
+    <% if (user) { %>
+    <p>Welcome back, <%= user %>!</p>
+    <a href="/notes">Go to My Notes</a>
+    <% } else { %>
     <p>
       Please <a href="/users/login">log in</a> or
       <a href="/users/register">register</a> to manage your study notes.
     </p>
+    <% } %>
 
     <p><a href="/notes/add">Add Note</a></p>
-    <br />
+
     <p><a href="/notes/search">Search Notes</a></p>
-    <br />
-    <p><a href="/notes">Notes List</a></p>
-    <br />
+
     <p><a href="/weather">Check Weather Today</a></p>
 
     <!-- about page -->
     <p><a href="/about">About Learning Notes System</a></p>
+
+    <!-- logout -->
+    <% if (user) { %>
+    <a href="/users/logout">Logout</a>
+    <% } %>
   </body>
 </html>

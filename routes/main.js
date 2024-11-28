@@ -4,19 +4,21 @@ const { redirectLogin } = require("./users");
 
 router.get("/", (req, res) => {
   if (req.session.userId) {
-    res.redirect("/notes");
+    res.render("index", {
+      title: "Learning Notes System",
+      user: req.session.username,
+    });
   } else {
-    res.render("index", { title: "Learning Notes System", user: null });
+    res.render("index", {
+      title: "Learning Notes System",
+      user: null,
+    });
   }
 });
 
 //home page add, search and list link
 router.get("/notes/add", redirectLogin, (req, res) => {
-  res.redirect("/notes/add");
-});
-
-router.get("/notes/search", redirectLogin, (req, res) => {
-  res.redirect("/notes/search");
+  res.render("add_note");
 });
 
 router.get("/notes", redirectLogin, (req, res) => {
