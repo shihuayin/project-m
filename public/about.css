@@ -1,0 +1,127 @@
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.8;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: #3f51b5;
+  margin-top: 30px;
+  font-size: 3em;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1.5px;
+}
+
+h2 {
+  color: #333;
+  margin-top: 0px;
+  font-size: 2.2em;
+  text-align: center;
+  font-weight: 600;
+}
+
+p {
+  font-size: 1.2em;
+  max-width: 800px;
+  width: 100%;
+  text-align: justify;
+  margin: 10px 0;
+  line-height: 1.8;
+  padding: 0 20px;
+  color: #444;
+}
+
+a {
+  color: #3f51b5;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 12px 25px;
+  background-color: #e3f2fd;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+  display: inline-block;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+a:hover {
+  text-decoration: underline;
+  background-color: #bbdefb;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.back-link {
+  margin-top: 50px;
+  padding: 15px 30px;
+  background-color: #8bc34a;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+  display: inline-block;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.back-link:hover {
+  background-color: #7cb342;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.container {
+  max-width: 900px;
+  padding: 50px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+  box-sizing: border-box;
+  text-align: left;
+  border: 1px solid #e0e0e0;
+}
+
+.container p {
+  margin: 20px 0;
+  color: #444;
+}
+
+ul {
+  list-style-type: disc;
+  margin: 25px 0;
+  padding-left: 45px;
+  max-width: 800px;
+  width: 100%;
+  font-size: 1.2em;
+  box-sizing: border-box;
+}
+
+li {
+  margin-bottom: 18px;
+  line-height: 1.8;
+  color: #444;
+}
+
+h1,
+h2 {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+p,
+li {
+  font-weight: 400;
+}
+
+a,
+.back-link {
+  cursor: pointer;
+}

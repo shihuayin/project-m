@@ -2,6 +2,7 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/index.css" />
   </head>
   <body>
     <h1>Welcome to <%= title %></h1>
@@ -11,14 +12,15 @@
     <a href="/notes">Go to My Notes</a>
     <% } else { %>
     <p>
-      Please <a href="/users/login">log in</a> or
-      <a href="/users/register">register</a> to manage your study notes.
+      Please <a href="/users/login">Log in</a> or
+      <a href="/users/register">Register</a> to manage your study notes.
     </p>
     <% } %>
 
-    <p><a href="/notes/add">Add Note</a></p>
-
-    <p><a href="/notes/search">Search Notes</a></p>
+    <p>
+      <a href="/notes/add">Add Note</a> |
+      <a href="/notes/search">Search Notes</a>
+    </p>
 
     <p><a href="/weather">Check Weather Today</a></p>
 

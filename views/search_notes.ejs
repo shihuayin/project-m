@@ -2,15 +2,18 @@
 <html>
 <head>
   <title>Search Notes</title>
-  <link rel="stylesheet" type="text/css" href="/main.css" />
+  <link rel="stylesheet" type="text/css" href="/search_notes.css" />
 </head>
 <body>
   <h1>Search Notes</h1>
   <!-- search form -->
   <form action="/notes/search" method="get">
+    <div class="form-group">
     <label for="category">Category:</label>
     <input type="text" name="category" value="<%= search ? search.category : '' %>" />
-    
+  </div>
+
+  <div class="form-group">
     <label for="week">Week:</label>
     <select name="week">
       <option value="">Select Week</option>
@@ -18,7 +21,7 @@
         <option value="Week <%= i %>" <%= search && search.week === 'Week ' + i ? 'selected' : '' %>>Week <%= i %></option>
       <% } %>
     </select>
-
+  </div>
     <button type="submit">Search</button>
   </form>
 

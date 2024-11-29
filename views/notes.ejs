@@ -2,16 +2,15 @@
 <html>
   <head>
     <title>Your Notes</title>
-    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <link rel="stylesheet" type="text/css" href="/notes.css" />
   </head>
   <body>
     <h1>Welcome, <%= username %>!</h1>
 
-    <h2>Your Notes</h2>
-    <a href="/notes/add">Add a New Note</a>
-    <br />
-    <a href="/notes/search">Search Notes</a>
-
+    <div class="link-container">
+      <a href="/notes/add">Add a New Note</a>
+      <a href="/notes/search">Search Notes</a>
+    </div>
     <% if (notes.length > 0) { %>
     <ul>
       <% notes.forEach(function(note) { %>
@@ -46,9 +45,11 @@
     <p>No notes found.</p>
     <% } %>
 
-
-    <a href="/">Back to Home page</a>
-    </br>
-    <a href="/users/logout">Logout</a>
+    <div class="footer-buttons">
+      <a href="/" class="footer-button">Back to Home page</a>
+      <a href="/users/logout" class="logout-link" class="footer-button"
+        >Logout</a
+      >
+    </div>
   </body>
 </html>

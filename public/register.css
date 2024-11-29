@@ -1,0 +1,105 @@
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+h1 {
+  color: #3f51b5;
+  margin-top: 50px;
+  font-size: 2.5em;
+}
+
+form {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+label {
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+  text-align: left;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button[type="submit"] {
+  background-color: #3f51b5;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #303f9f;
+}
+
+.hint {
+  color: grey;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.success {
+  color: green;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+a {
+  color: #3f51b5;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+  max-width: 400px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+li {
+  margin-bottom: 5px;
+}
