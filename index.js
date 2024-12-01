@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 const session = require("express-session");
 const expressSanitizer = require("express-sanitizer");
 const app = express();
-const port = 8001;
+const port = 8000;
 
 app.set("view engine", "ejs");
 
