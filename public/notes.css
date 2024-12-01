@@ -12,15 +12,9 @@ body {
 
 h1 {
   color: #3f51b5;
-  margin-top: 50px;
+  margin-top: 20px;
   font-size: 2.8em;
   font-weight: bold;
-}
-
-h2 {
-  color: #333;
-  margin-top: 20px;
-  font-size: 2.2em;
 }
 
 a {
@@ -100,6 +94,7 @@ p {
 
 strong {
   font-weight: bold;
+  color: brown;
 }
 
 .location-info {

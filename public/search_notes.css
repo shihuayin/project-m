@@ -29,7 +29,7 @@ form {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 10px; /* 添加间距，使输入框之间有空隙 */
+  gap: 10px;
 }
 
 label {
