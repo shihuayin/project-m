@@ -97,7 +97,7 @@ router.post("/add", redirectLogin, (req, res) => {
         return res.status(500).send("Failed to add note");
       }
 
-      res.redirect("../notes");
+      res.redirect("./");
     }
   );
 });

@@ -8,13 +8,11 @@ const router = express.Router();
 router.use(expressSanitizer());
 
 function redirectLogin(req, res, next) {
-  if (!req.session.userId) { 
+  if (!req.session.userId) {
     const isNotesPath = req.originalUrl.endsWith("/notes");
 
     //Use './users/login" if path is "/notes" otherwise use "../users/login"
-    const redirectPath = isNotesPath ?
-      "./users/login" :
-      "../users/login";
+    const redirectPath = isNotesPath ? "./users/login" : "../users/login";
     res.redirect(redirectPath);
   } else {
     next();
@@ -153,7 +151,7 @@ router.get("/logout", (req, res) => {
     if (err) {
       return res.send("Error logging out: " + err.message);
     }
-    res.redirect("/usr/109/users/login");
+    res.redirect("../users/login");
   });
 });
 
