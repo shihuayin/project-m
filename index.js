@@ -30,13 +30,24 @@ const db = mysql.createConnection({
   database: "daw_learn_notes",
 });
 
-//connect to database
+// Connect to database
 db.connect((err) => {
   if (err) {
     console.error("Unable to connect to the database:", err.message);
     return;
   }
   console.log("Successfully connected to the database");
+
+  // Add keep-alive query
+  setInterval(() => {
+    db.query("SELECT 1", (err) => {
+      if (err) {
+        console.error("Error executing keep-alive query:", err.message);
+      } else {
+        console.log("Keep-alive query executed successfully");
+      }
+    });
+  }, 21600000);
 });
 global.db = db;
 
