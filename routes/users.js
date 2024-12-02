@@ -8,8 +8,14 @@ const router = express.Router();
 router.use(expressSanitizer());
 
 function redirectLogin(req, res, next) {
-  if (!req.session.userId) {
-    res.redirect("/users/login");
+  if (!req.session.userId) { 
+    const isNotesPath = req.originalUrl.endsWith("/notes");
+
+    //Use './users/login" if path is "/notes" otherwise use "../users/login"
+    const redirectPath = isNotesPath ?
+      "./users/login" :
+      "../users/login";
+    res.redirect(redirectPath);
   } else {
     next();
   }
@@ -134,7 +140,7 @@ router.post("/login", async (req, res) => {
       req.session.userId = user.id;
       req.session.username = user.username;
 
-      res.redirect("/notes");
+      res.redirect("../notes");
     });
   } catch (error) {
     res.send("Error during login: " + error.message);
@@ -147,7 +153,7 @@ router.get("/logout", (req, res) => {
     if (err) {
       return res.send("Error logging out: " + err.message);
     }
-    res.redirect("/users/login");
+    res.redirect("/usr/109/users/login");
   });
 });
 

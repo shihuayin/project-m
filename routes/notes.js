@@ -97,7 +97,7 @@ router.post("/add", redirectLogin, (req, res) => {
         return res.status(500).send("Failed to add note");
       }
 
-      res.redirect("/notes");
+      res.redirect("../notes");
     }
   );
 });
@@ -113,7 +113,7 @@ router.post("/delete/:id", redirectLogin, (req, res) => {
       return res.status(500).send("Failed to delete note");
     }
 
-    res.redirect("/notes");
+    res.redirect("../");
   });
 });
 
@@ -154,7 +154,7 @@ router.post("/edit/:id", redirectLogin, (req, res) => {
         return res.status(500).send("Failed to update note");
       }
 
-      res.redirect("/notes");
+      res.redirect("../");
     }
   );
 });
